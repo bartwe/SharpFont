@@ -51,7 +51,6 @@ namespace SharpFont
 		private GCHandle memoryFaceHandle;
 
 		private Library parentLibrary;
-		private List<FTSize> childSizes;
 
 		#endregion
 
@@ -138,8 +137,6 @@ namespace SharpFont
 
 		private Face(Library parent): base(IntPtr.Zero)
 		{
-			childSizes = new List<FTSize>();
-
 			if (parent != null)
 			{
 				parentLibrary = parent;
@@ -574,7 +571,7 @@ namespace SharpFont
 				if (disposed)
 					throw new ObjectDisposedException("Size", "Cannot access a disposed object.");
 
-				return new FTSize(rec.size, false, this);
+				return new FTSize(rec.size, this);
 			}
 		}
 
@@ -1509,24 +1506,6 @@ namespace SharpFont
 
 		#endregion
 
-		#region Size Management
-
-		/// <summary>
-		/// Create a new size object from a given face object.
-		/// </summary>
-		/// <remarks>
-		/// You need to call <see cref="FTSize.Activate"/> in order to select the new size for upcoming calls to
-		/// <see cref="SetPixelSizes"/>, <see cref="SetCharSize"/>, <see cref="LoadGlyph"/>, <see cref="LoadChar"/>,
-		/// etc.
-		/// </remarks>
-		/// <returns>A handle to a new size object.</returns>
-		public FTSize NewSize()
-		{
-			return new FTSize(this);
-		}
-
-		#endregion
-
 		#region Multiple Masters
 
 		/// <summary><para>
@@ -2366,26 +2345,11 @@ namespace SharpFont
 			GC.SuppressFinalize(this);
 		}
 
-		internal void AddChildSize(FTSize child)
-		{
-			childSizes.Add(child);
-		}
-
-		internal void RemoveChildSize(FTSize child)
-		{
-			childSizes.Remove(child);
-		}
-
 		private void Dispose(bool disposing)
 		{
 			if (!disposed)
 			{
 				disposed = true;
-
-				foreach (FTSize s in childSizes)
-					s.Dispose();
-
-				childSizes.Clear();
 
 				FT.FT_Done_Face(base.Reference);
 

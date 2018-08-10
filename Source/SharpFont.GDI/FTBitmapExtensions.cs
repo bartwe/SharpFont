@@ -29,9 +29,6 @@ namespace SharpFont.Gdi
 		/// <returns>A GDI+ <see cref="Bitmap"/> containing this bitmap's data with a transparent background.</returns>
 		public static Bitmap ToGdipBitmap(this FTBitmap b, Color color)
 		{
-			if (b.IsDisposed)
-				throw new ObjectDisposedException("FTBitmap", "Cannot access a disposed object.");
-
 			if (b.Width == 0 || b.Rows == 0)
 				throw new InvalidOperationException("Invalid image size - one or both dimensions are 0.");
 

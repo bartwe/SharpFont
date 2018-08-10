@@ -216,7 +216,7 @@ namespace SharpFont.Cache
 				throw new FreeTypeException(err);
 
 			//HACK fix this later.
-			return new FTSize(sizeRef, false, null);
+			return new FTSize(sizeRef, null);
 		}
 
 		/// <summary>

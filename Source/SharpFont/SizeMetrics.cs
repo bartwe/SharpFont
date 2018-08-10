@@ -45,7 +45,7 @@ namespace SharpFont
 	/// </para><para>
 	/// The <see cref="SizeMetrics"/> structure is valid for bitmap fonts also.
 	/// </para></remarks>
-	public sealed class SizeMetrics
+	public struct SizeMetrics
 	{
 		#region Fields
 

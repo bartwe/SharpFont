@@ -72,7 +72,7 @@ namespace SharpFont
 	/// endfor  
 	/// </code>
 	/// </example>
-	public sealed class GlyphSlot
+    public struct GlyphSlot
 	{
 		#region Fields
 
@@ -88,7 +88,8 @@ namespace SharpFont
 
 		internal GlyphSlot(IntPtr reference, Face parentFace, Library parentLibrary)
 		{
-			Reference = reference;
+            this.reference = reference;
+            rec = PInvokeHelper.PtrToStructure<GlyphSlotRec>(reference);
 			this.parentFace = parentFace;
 			this.parentLibrary = parentLibrary;
 		}
@@ -358,7 +359,7 @@ namespace SharpFont
 		/// This is a replacement for FT_Generic in FreeType. If you are retrieving the same object multiple times
 		/// from functions, this object will not appear in new copies.
 		/// </remarks>
-		public object Tag { get; set; }
+		//public object Tag { get; set; }
 
 		/// <summary>
 		/// Gets other data. Really wicked formats can use this pointer to present their own glyph image to client
@@ -377,12 +378,6 @@ namespace SharpFont
 			get
 			{
 				return reference;
-			}
-
-			set
-			{
-				reference = value;
-				rec = PInvokeHelper.PtrToStructure<GlyphSlotRec>(reference);
 			}
 		}
 

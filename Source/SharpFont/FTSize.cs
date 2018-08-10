@@ -32,85 +32,23 @@ namespace SharpFont
 	/// <summary>
 	/// FreeType root size class structure. A size object models a face object at a given size.
 	/// </summary>
-	public sealed class FTSize : IDisposable
+	public sealed class FTSize
 	{
-		#region Fields
-
-		private bool userAlloc;
-		private bool disposed;
-		private bool duplicate;
-
 		private IntPtr reference;
 		private SizeRec rec;
 
 		private Face parentFace;
 
-		#endregion
 
-		#region Constructors
-
-		/// <summary>
-		/// Initializes a new instance of the <see cref="FTSize"/> class.
-		/// </summary>
-		/// <param name="parent">The parent face.</param>
-		public FTSize(Face parent)
+		internal FTSize(IntPtr reference,  Face parentFace)
 		{
-			IntPtr reference;
-			Error err = FT.FT_New_Size(parent.Reference, out reference);
+            this.reference = reference;
+            rec = PInvokeHelper.PtrToStructure<SizeRec>(reference);
 
-			if (err != Error.Ok)
-				throw new FreeTypeException(err);
-
-			Reference = reference;
-			userAlloc = true;
-		}
-
-		internal FTSize(IntPtr reference, bool userAlloc, Face parentFace)
-		{
-			Reference = reference;
-
-			this.userAlloc = userAlloc;
 
 			if (parentFace != null)
 			{
 				this.parentFace = parentFace;
-				parentFace.AddChildSize(this);
-			}
-			else
-			{
-				duplicate = true;
-			}
-		}
-
-		/// <summary>
-		/// Finalizes an instance of the FTSize class.
-		/// </summary>
-		~FTSize()
-		{
-			Dispose(false);
-		}
-
-		#endregion
-
-		#region Events
-
-		/// <summary>
-		/// Occurs when the size is disposed.
-		/// </summary>
-		public event EventHandler Disposed;
-
-		#endregion
-
-		#region Properties
-
-		/// <summary>
-		/// Gets a value indicating whether the object has been disposed.
-		/// </summary>
-		public bool IsDisposed
-		{
-			get
-			{
-				return disposed;
 			}
 		}
 
@@ -121,35 +59,7 @@ namespace SharpFont
 		{
 			get
 			{
-				if (disposed)
-					throw new ObjectDisposedException("Face", "Cannot access a disposed object.");
-
 				return parentFace;
-			}
-		}
-
-		/// <summary>
-		/// Gets or sets a typeless pointer, which is unused by the FreeType library or any of its drivers. It can be used by
-		/// client applications to link their own data to each size object.
-		/// </summary>
-		[Obsolete("Use the Tag property and Disposed event instead.")]
-		public Generic Generic
-		{
-			get
-			{
-				if (disposed)
-					throw new ObjectDisposedException("Generic", "Cannot access a disposed object.");
-
-				return new Generic(rec.generic);
-			}
-
-			set
-			{
-				if (disposed)
-					throw new ObjectDisposedException("Generic", "Cannot access a disposed object.");
-
-				value.WriteToUnmanagedMemory(PInvokeHelper.AbsoluteOffsetOf<SizeRec>(Reference, "generic"));
-				Reference = reference; //update rec.
 			}
 		}
 
@@ -160,9 +70,6 @@ namespace SharpFont
 		{
 			get
 			{
-				if (disposed)
-					throw new ObjectDisposedException("Metrics", "Cannot access a disposed object.");
-
 				return new SizeMetrics(rec.metrics);
 			}
 		}
@@ -181,25 +88,10 @@ namespace SharpFont
 		{
 			get
 			{
-				if (disposed)
-					throw new ObjectDisposedException("Reference", "Cannot access a disposed object.");
-
 				return reference;
-			}
-
-			set
-			{
-				if (disposed)
-					throw new ObjectDisposedException("Reference", "Cannot access a disposed object.");
-
-				reference = value;
-				this.rec = PInvokeHelper.PtrToStructure<SizeRec>(reference);
 			}
 		}
 
-		#endregion
-
-		#region Public Methods
 
 		/// <summary><para>
 		/// Even though it is possible to create several size objects for a given face (see
@@ -215,55 +107,10 @@ namespace SharpFont
 		/// </remarks>
 		public void Activate()
 		{
-			if (disposed)
-				throw new ObjectDisposedException("Activate", "Cannot access a disposed object.");
-
 			Error err = FT.FT_Activate_Size(Reference);
 
 			if (err != Error.Ok)
 				throw new FreeTypeException(err);
 		}
-
-		/// <summary>
-		/// Diposes the FTSize.
-		/// </summary>
-		public void Dispose()
-		{
-			Dispose(true);
-			GC.SuppressFinalize(this);
-		}
-
-		#endregion
-
-		#region Private Methods
-
-		private void Dispose(bool disposing)
-		{
-			if (!disposed)
-			{
-				disposed = true;
-
-				//only dispose the user allocated sizes that are not duplicates.
-				if (userAlloc && !duplicate)
-				{
-					FT.FT_Done_Size(reference);
-				}
-
-				// removes itself from the parent Face, with a check to prevent this from happening when Face is
-				// being disposed (Face disposes all it's children with a foreach loop, this causes an
-				// InvalidOperationException for modifying a collection during enumeration)
-				if (parentFace != null && !parentFace.IsDisposed)
-					parentFace.RemoveChildSize(this);
-
-				reference = IntPtr.Zero;
-				rec = new SizeRec();
-
-				EventHandler handler = Disposed;
-				if (handler != null)
-					handler(this, EventArgs.Empty);
-			}
-		}
-
-		#endregion
 	}
 }

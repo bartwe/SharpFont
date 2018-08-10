@@ -57,13 +57,16 @@ namespace SharpFont
 						{
 							isMacOS = false;
 
-							var os = typeof(Environment)
-								?.GetRuntimeProperty("OSVersion")
-								?.GetValue(null);
+							var et = typeof(Environment).GetRuntimeProperty("OSVersion");
 
-							var platformObj = os
-								?.GetType().GetRuntimeProperty("Platform")
-								?.GetValue(os);
+							var os = (et == null)?null:et.GetValue(null);
+
+							object platformObj = null;
+							if (os != null) {
+							   et = os.GetType().GetRuntimeProperty("Platform");
+								if (et != null)
+							   platformObj = et.GetValue(os);
+							}
 
 							if (platformObj != null)
 							{
@@ -83,7 +86,7 @@ namespace SharpFont
 		/// Defines the location of the FreeType DLL. Update SharpFont.dll.config if you change this!
 		/// </summary>
 		/// TODO: Use the same name for all platforms.
-	    private const string FreetypeDll = "freetype6";
+		private const string FreetypeDll = "freetype6";
 
 		/// <summary>
 		/// Defines the calling convention for P/Invoking the native freetype methods.

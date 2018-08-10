@@ -146,19 +146,19 @@ namespace SharpFont
 		{
 			if (moveTo == null)
 			{
-				throw new ArgumentNullException(nameof(moveTo));
+				throw new ArgumentNullException("moveTo");
 			}
 			if (lineTo == null)
 			{
-				throw new ArgumentNullException(nameof(lineTo));
+				throw new ArgumentNullException("lineTo");
 			}
 			if (conicTo == null)
 			{
-				throw new ArgumentNullException(nameof(conicTo));
+				throw new ArgumentNullException("conicTo");
 			}
 			if (cubicTo == null)
 			{
-				throw new ArgumentNullException(nameof(cubicTo));
+				throw new ArgumentNullException("cubicTo");
 			}
 
 			moveToFunc = moveTo;

@@ -205,7 +205,7 @@ namespace SharpFont
 		{
 			if (!IsMacOS)
 				throw new InvalidOperationException(
-					$"{nameof(GetFileFromMacName)} can only be called on macOS.");
+					"{nameof(GetFileFromMacName)} can only be called on macOS.");
 
 			IntPtr fsspec;
 
@@ -227,7 +227,7 @@ namespace SharpFont
 		{
 			if (!IsMacOS)
 				throw new InvalidOperationException(
-					$"{nameof(GetFileFromMacAtsName)} can only be called on macOS.");
+					"{nameof(GetFileFromMacAtsName)} can only be called on macOS.");
 
 			IntPtr fsspec;
 
@@ -252,7 +252,7 @@ namespace SharpFont
 		{
 			if (!IsMacOS)
 				throw new InvalidOperationException(
-					$"{nameof(GetFilePathFromMacAtsName)} can only be called on macOS.");
+					"{nameof(GetFilePathFromMacAtsName)} can only be called on macOS.");
 
 			int faceIndex;
 

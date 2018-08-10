@@ -288,7 +288,7 @@ namespace SharpFont
 		{
 			if (!FT.IsMacOS)
 				throw new InvalidOperationException(
-					$"{nameof(NewFaceFromFond)} can only be called on macOS.");
+					"{nameof(NewFaceFromFond)} can only be called on macOS.");
 
 			if (disposed)
 				throw new ObjectDisposedException("Library", "Cannot access a disposed object.");
@@ -317,7 +317,7 @@ namespace SharpFont
 		{
 			if (!FT.IsMacOS)
 				throw new InvalidOperationException(
-					$"{nameof(NewFaceFromFSSpec)} can only be called on macOS.");
+					"{nameof(NewFaceFromFSSpec)} can only be called on macOS.");
 
 			if (disposed)
 				throw new ObjectDisposedException("Library", "Cannot access a disposed object.");
@@ -346,7 +346,7 @@ namespace SharpFont
 		{
 			if (!FT.IsMacOS)
 				throw new InvalidOperationException(
-					$"{nameof(NewFaceFromFSRef)} can only be called on macOS.");
+					"{nameof(NewFaceFromFSRef)} can only be called on macOS.");
 
 			if (disposed)
 				throw new ObjectDisposedException("Library", "Cannot access a disposed object.");

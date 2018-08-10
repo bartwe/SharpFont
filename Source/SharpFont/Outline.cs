@@ -542,9 +542,6 @@ namespace SharpFont
 			if (library == null)
 				throw new ArgumentNullException("library");
 
-			if (bitmap == null)
-				throw new ArgumentNullException("bitmap");
-
 			Error err = FT.FT_Outline_Get_Bitmap(library.Reference, reference, bitmap.Reference);
 
 			if (err != Error.Ok)

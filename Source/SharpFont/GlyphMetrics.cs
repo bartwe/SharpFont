@@ -38,7 +38,7 @@ namespace SharpFont
 	/// If not disabled with <see cref="LoadFlags.NoHinting"/>, the values represent dimensions of the hinted glyph (in
 	/// case hinting is applicable). 
 	/// </remarks>
-	public sealed class GlyphMetrics
+	public struct GlyphMetrics
 	{
 		#region Fields
 
@@ -51,11 +51,13 @@ namespace SharpFont
 
 		internal GlyphMetrics(IntPtr reference)
 		{
-			Reference = reference;
+            this.reference = reference;
+            rec = PInvokeHelper.PtrToStructure<GlyphMetricsRec>(reference);
 		}
 
 		internal GlyphMetrics(GlyphMetricsRec glyphMetInt)
 		{
+            reference = IntPtr.Zero;
 			this.rec = glyphMetInt;
 		}
 
@@ -166,12 +168,6 @@ namespace SharpFont
 			get
 			{
 				return reference;
-			}
-
-			set
-			{
-				reference = value;
-				rec = PInvokeHelper.PtrToStructure<GlyphMetricsRec>(reference);
 			}
 		}
 
