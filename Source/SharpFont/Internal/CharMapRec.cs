@@ -40,7 +40,7 @@ namespace SharpFont.Internal
 	{
 		internal IntPtr face;
 		internal Encoding encoding;
-		internal PlatformId platform_id;
+		internal FontPlatformId platform_id;
 		internal ushort encoding_id;
 	}
 }

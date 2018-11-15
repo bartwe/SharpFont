@@ -22,7 +22,7 @@
     <DebugType>full</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;CONSOLE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>
@@ -138,7 +138,7 @@
     <Compile Include="ListNode.cs" />
     <Compile Include="LoadFlags.cs" />
     <Compile Include="LoadTarget.cs" />
-    <Compile Include="Memory.cs" />
+    <Compile Include="FontMemory.cs" />
     <Compile Include="Module.cs" />
     <Compile Include="ModuleClass.cs" />
     <Compile Include="MultipleMasters\Internal\MMAxisRec.cs" />
@@ -210,7 +210,7 @@
     <Compile Include="TrueType\MaxProfile.cs" />
     <Compile Include="TrueType\OS2.cs" />
     <Compile Include="TrueType\Pclt.cs" />
-    <Compile Include="TrueType\PlatformId.cs" />
+    <Compile Include="TrueType\FontPlatformId.cs" />
     <Compile Include="TrueType\Postscript.cs" />
     <Compile Include="TrueType\SfntName.cs" />
     <Compile Include="TrueType\SfntTag.cs" />

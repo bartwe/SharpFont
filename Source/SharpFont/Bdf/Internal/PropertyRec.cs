@@ -27,6 +27,15 @@ using System.Runtime.InteropServices;
 
 namespace SharpFont.Bdf.Internal
 {
+#if CONSOLE
+	internal struct PropertyRec
+	{
+		internal PropertyType type;
+		internal IntPtr atom;
+		internal int integer;
+		internal uint cardinal;
+	}
+#else
 	[StructLayout(LayoutKind.Explicit, Pack = 0)]
 	internal struct PropertyRec
 	{
@@ -42,4 +51,5 @@ namespace SharpFont.Bdf.Internal
 		[FieldOffset(4)]
 		internal uint cardinal;
 	}
+#endif
 }

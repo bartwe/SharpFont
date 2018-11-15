@@ -47,7 +47,7 @@ namespace SharpFont
 		private OutlineRec rec;
 
 		private Library parentLibrary;
-		private Memory parentMemory;
+		private FontMemory parentMemory;
 
 		#endregion
 
@@ -85,7 +85,7 @@ namespace SharpFont
 		/// <param name="pointsCount">The maximum number of points within the outline.</param>
 		/// <param name="contoursCount">The maximum number of contours within the outline.</param>
 		[CLSCompliant(false)]
-		public Outline(Memory memory, uint pointsCount, int contoursCount)
+		public Outline(FontMemory memory, uint pointsCount, int contoursCount)
 		{
 			IntPtr reference;
 			Error err = FT.FT_Outline_New_Internal(memory.Reference, pointsCount, contoursCount, out reference);

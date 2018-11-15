@@ -46,7 +46,7 @@ namespace SharpFont.Internal
         }
 
         /// <summary>
-        /// Performs an implicit conversion from <see cref="Memory"/> to <see cref="NativeReference{T}"/>.
+        /// Performs an implicit conversion from <see cref="FontMemory"/> to <see cref="NativeReference{T}"/>.
         /// </summary>
         /// <param name="memory">The memory.</param>
         /// <returns>The result of the conversion.</returns>

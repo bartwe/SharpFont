@@ -85,7 +85,7 @@ namespace SharpFont
 		/// TrueType specification and should be emulated for other formats.
 		/// </summary>
 		[CLSCompliant(false)]
-		public PlatformId PlatformId
+		public FontPlatformId PlatformId
 		{
 			get
 			{

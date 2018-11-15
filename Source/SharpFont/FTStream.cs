@@ -160,11 +160,11 @@ namespace SharpFont
 		/// Gets the memory manager to use to preload frames. This is set internally by FreeType and shouldn't be
 		/// touched by stream implementations.
 		/// </summary>
-		public Memory Memory
+		public FontMemory Memory
 		{
 			get
 			{
-				return new Memory(PInvokeHelper.AbsoluteOffsetOf<StreamRec>(Reference, "memory"));
+				return new FontMemory(PInvokeHelper.AbsoluteOffsetOf<StreamRec>(Reference, "memory"));
 			}
 		}
 
