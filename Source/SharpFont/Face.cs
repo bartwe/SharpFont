@@ -1904,35 +1904,6 @@ namespace SharpFont
 				throw new FreeTypeException(err);
 		}
 
-		/// <summary>
-		/// Retrieve a BDF property from a BDF or PCF font file.
-		/// </summary>
-		/// <remarks><para>
-		/// This function works with BDF and PCF fonts. It returns an error otherwise. It also returns an error if the
-		/// property is not in the font.
-		/// </para><para>
-		/// A ‘property’ is a either key-value pair within the STARTPROPERTIES ... ENDPROPERTIES block of a BDF font or
-		/// a key-value pair from the ‘info->props’ array within a ‘FontRec’ structure of a PCF font.
-		/// </para><para>
-		/// Integer properties are always stored as ‘signed’ within PCF fonts; consequently,
-		/// <see cref="PropertyType.Cardinal"/> is a possible return value for BDF fonts only.
-		/// </para><para>
-		/// In case of error, ‘aproperty->type’ is always set to <see cref="PropertyType.None"/>.
-		/// </para></remarks>
-		/// <param name="propertyName">The property name.</param>
-		/// <returns>The property.</returns>
-		public Property GetBdfProperty(string propertyName)
-		{
-			IntPtr propertyRef;
-
-			Error err = FT.FT_Get_BDF_Property(Reference, propertyName, out propertyRef);
-
-			if (err != Error.Ok)
-				throw new FreeTypeException(err);
-
-			return new Property(propertyRef);
-		}
-
 		#endregion
 
 		#region CID Fonts
