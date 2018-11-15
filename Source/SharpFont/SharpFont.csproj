@@ -44,8 +44,6 @@
   <ItemGroup>
     <Compile Include="AutoHinterScript.cs" />
     <Compile Include="BBox.cs" />
-    <Compile Include="Bdf\Internal\PropertyRec.cs" />
-    <Compile Include="Bdf\Property.cs" />
     <Compile Include="Bdf\PropertyType.cs" />
     <Compile Include="BitmapGlyph.cs" />
     <Compile Include="BitmapSize.cs" />
