@@ -57,15 +57,16 @@ namespace SharpFont
 						{
 							isMacOS = false;
 
+#if !CONSOLE
 							var et = typeof(Environment).GetRuntimeProperty("OSVersion");
 
 							var os = (et == null)?null:et.GetValue(null);
 
 							object platformObj = null;
 							if (os != null) {
-							   et = os.GetType().GetRuntimeProperty("Platform");
+								et = os.GetType().GetRuntimeProperty("Platform");
 								if (et != null)
-							   platformObj = et.GetValue(os);
+									platformObj = et.GetValue(os);
 							}
 
 							if (platformObj != null)
@@ -74,6 +75,7 @@ namespace SharpFont
 								if (platform == 6)
 									isMacOS = true;
 							}
+#endif
 						}
 					}
 				}

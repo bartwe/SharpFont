@@ -63,7 +63,7 @@ namespace SharpFont.TrueType
 		/// Gets the platform ID for ‘string’.
 		/// </summary>
 		[CLSCompliant(false)]
-		public PlatformId PlatformId
+		public FontPlatformId PlatformId
 		{
 			get
 			{

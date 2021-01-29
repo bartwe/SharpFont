@@ -34,7 +34,7 @@ namespace SharpFont
 	/// </summary>
 	/// <remarks>
 	/// The ‘memory’ parameter is a typeless pointer in order to avoid un-wanted dependencies on the rest of the
-	/// FreeType code. In practice, it is an <see cref="Memory"/> object, i.e., a handle to the standard FreeType
+	/// FreeType code. In practice, it is an <see cref="FontMemory"/> object, i.e., a handle to the standard FreeType
 	/// memory allocator. However, this field can be completely ignored by a given raster implementation.
 	/// </remarks>
 	/// <param name="memory">A handle to the memory allocator.</param>

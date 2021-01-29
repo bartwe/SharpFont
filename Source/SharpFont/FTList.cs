@@ -50,7 +50,7 @@ namespace SharpFont
 	/// A typeless pointer passed to <see cref="FTList.Iterate"/>. It can be used to point to the iteration's state.
 	/// </param>
 	[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-	public delegate void ListDestructor(NativeReference<Memory> memory, IntPtr data, IntPtr user);
+	public delegate void ListDestructor(NativeReference<FontMemory> memory, IntPtr data, IntPtr user);
 
 	/// <summary>
 	/// A structure used to hold a simple doubly-linked list. These are used in many parts of FreeType.
@@ -185,7 +185,7 @@ namespace SharpFont
 		/// <param name="destroy">A list destructor that will be applied to each element of the list.</param>
 		/// <param name="memory">The current memory object which handles deallocation.</param>
 		/// <param name="user">A user-supplied field which is passed as the last argument to the destructor.</param>
-		public void Finalize(ListDestructor destroy, Memory memory, IntPtr user)
+		public void Finalize(ListDestructor destroy, FontMemory memory, IntPtr user)
 		{
 			FT.FT_List_Finalize(Reference, destroy, memory.Reference, user);
 		}

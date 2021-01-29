@@ -30,7 +30,7 @@ namespace SharpFont.TrueType.Internal
 	[StructLayout(LayoutKind.Sequential)]
 	internal struct SfntNameRec
 	{
-		internal PlatformId platform_id;
+		internal FontPlatformId platform_id;
 		internal ushort encoding_id;
 		internal ushort language_id;
 		internal ushort name_id;

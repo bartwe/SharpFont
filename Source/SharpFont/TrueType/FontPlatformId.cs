@@ -31,7 +31,7 @@ namespace SharpFont.TrueType
 	/// <see cref="SfntName"/> structures.
 	/// </summary>
 	[CLSCompliant(false)]
-	public enum PlatformId : ushort
+	public enum FontPlatformId : ushort
 	{
 		/// <summary>
 		/// Used by Apple to indicate a Unicode character map and/or name entry. See TT_APPLE_ID_XXX for corresponding

@@ -2133,6 +2133,7 @@ namespace SharpFont
 		/// If <see cref="LoadFlags.VerticalLayout"/> is set, this is the vertical advance corresponding to a vertical
 		/// layout. Otherwise, it is the horizontal advance in a horizontal layout.
 		/// </para></returns>
+#if !CONSOLE
 		[CLSCompliant(false)]
 		public Fixed16Dot16 GetAdvance(uint glyphIndex, LoadFlags flags)
 		{
@@ -2144,6 +2145,7 @@ namespace SharpFont
 
 			return Fixed16Dot16.FromRawValue((int)padvance);
 		}
+#endif
 
 		/// <summary>
 		/// Retrieve the advance values of several glyph outlines in an
@@ -2166,6 +2168,7 @@ namespace SharpFont
 		/// <returns><para>The advances, in either font units or 16.16 format. This array must contain at least ‘count’ elements.
 		/// </para><para>
 		/// If <see cref="LoadFlags.VerticalLayout"/> is set, these are the vertical advances corresponding to a vertical layout. Otherwise, they are the horizontal advances in a horizontal layout.</para></returns>
+#if !CONSOLE
 		[CLSCompliant(false)]
 		public unsafe Fixed16Dot16[] GetAdvances(uint start, uint count, LoadFlags flags)
 		{
@@ -2184,6 +2187,7 @@ namespace SharpFont
 
 			return advances;
 		}
+#endif
 
 		#endregion
 

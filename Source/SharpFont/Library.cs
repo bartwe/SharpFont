@@ -36,7 +36,7 @@ namespace SharpFont
 	/// A handle to a FreeType library instance. Each ‘library’ is completely independent from the others; it is the
 	/// ‘root’ of a set of objects like fonts, faces, sizes, etc.
 	/// </para><para>
-	/// It also embeds a memory manager (see <see cref="Memory"/>), as well as a scan-line converter object (see
+	/// It also embeds a memory manager (see <see cref="FontMemory"/>), as well as a scan-line converter object (see
 	/// <see cref="Raster"/>).
 	/// </para><para>
 	/// For multi-threading applications each thread should have its own <see cref="Library"/> object.
@@ -85,7 +85,7 @@ namespace SharpFont
 		/// Initializes a new instance of the <see cref="Library"/> class.
 		/// </summary>
 		/// <param name="memory">A custom FreeType memory manager.</param>
-		public Library(Memory memory)
+		public Library(FontMemory memory)
 			: this(false)
 		{
 			IntPtr libraryRef;
@@ -643,7 +643,7 @@ namespace SharpFont
 
 		/// <summary>
 		/// Add the set of default drivers to a given library object. This is only useful when you create a library
-		/// object with <see cref="Library(Memory)"/> (usually to plug a custom memory manager).
+		/// object with <see cref="Library(FontMemory)"/> (usually to plug a custom memory manager).
 		/// </summary>
 		public void AddDefaultModules()
 		{
